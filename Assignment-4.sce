@@ -1,8 +1,20 @@
 
 disp('T orthogonalise the given vectors using Gram-Schimdt Orthogonalisation in r3')
-a = [1; 0; 1]
-b = [1; 0; 0]
-c = [2; 1; 1]
+disp('Enter the matrix A');
+//Taking input of Matrix A
+a11=input("Enter a11: ");
+a12=input("Enter a12: ");
+a13=input("Enter a13: ");
+a21=input("Enter a21: ");
+a22=input("Enter a22: ");
+a23=input("Enter a23: ");
+a31=input("Enter a31: ");
+a32=input("Enter a32: ");
+a33=input("Enter a33: ");
+
+a = [a11; a21; a31]
+b = [a12; a22; a32]
+c = [a13; a23; a33]
 disp(c,'c= ',b,'b= ',a,'a= ')
 disp('Let q1=a/||a||')
 q1 = a
@@ -25,18 +37,72 @@ s3 = sqrt(q3(1,1)^2 + q3(2,1)^2 + q3(3,1)^2)
 disp(q3/s3,q2/s2,q1/s1)
 
 disp('To find Eigen values and Eigen vectors of any square matrix of size 3*3')
-disp('A=')
-a = [8 -6 2;-6 7 -4;2 -4 3]
-disp(a)
-disp('Eigen values of A are: ')
-disp(spec(a))
-[c,d] = spec(a)
-disp('Eigen Vectors of A are: ')
-disp(c)
-disp('To find the largest Eigen value')
-A=input("enter the matrix ")
+function func(a)
+    lam=poly(0,'lam');
+    lam=lam
+    charmat=a-lam*eye(3,3);
+    disp(charmat,"the characteristic matrix is");
+    charpoly=poly(a,'lam');
+    disp(charpoly,"the characteristic polynomial is:");
+    lam=spec(a);
+    disp(lam,"the eigen values of A are");
+        
+endfunction
+function[x,lam]=eigenvectors(a)
+        [n,m]=size(a);
+        lam=spec(a);
+        x=[];
+        for k=1:3
+            B=a-lam(k)*eye(3,3);
+            C=B(1:n-1,1:n-1);
+            b=-B(1:n-1,n);
+            y=C\b;
+            y=[y;1];
+            y=y/norm(y);
+            x=[x y];
+                    end
+endfunction
+disp('Enter the matrix A');
+//Taking input of Matrix A
+a11=input("Enter a11: ");
+a12=input("Enter a12: ");
+a13=input("Enter a13: ");
+a21=input("Enter a21: ");
+a22=input("Enter a22: ");
+a23=input("Enter a23: ");
+a31=input("Enter a31: ");
+a32=input("Enter a32: ");
+a33=input("Enter a33: ");
 
-u0=input("enter the initial vector [AS COLUMN]")
+A=[a11,a12,a13;a21,a22,a23;a31,a32,a33];
+a=A;
+disp('A=')
+disp(a)
+func (a);
+
+[x,lam]=eigenvectors(a)
+disp(x,"the eigen vectors of a are");
+
+
+
+//power method
+
+disp('Enter the matrix A');
+//Taking input of Matrix A
+a11=input("Enter a11: ");
+a12=input("Enter a12: ");
+a13=input("Enter a13: ");
+a21=input("Enter a21: ");
+a22=input("Enter a22: ");
+a23=input("Enter a23: ");
+a31=input("Enter a31: ");
+a32=input("Enter a32: ");
+a33=input("Enter a33: ");
+
+A=[a11,a12,a13;a21,a22,a23;a31,a32,a33];
+
+u0=[1, 1, 1]';
+disp(u0,"initial vector is")
 v=A*u0;
 a=max(u0); 
 
