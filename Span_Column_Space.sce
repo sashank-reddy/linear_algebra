@@ -1,3 +1,5 @@
+//this is a part of assignment-2 which has been merged into new file along with other.
+
 //Span of Column Space
 //input of 3*3 matrix A
 disp('Enter the matrix A');
